@@ -1,10 +1,11 @@
-package be.intebrussel.restmountain.model;
+package be.intecbrussel.restmountain.model;
 
 public class Mountain {
 	private final long id;
     private final String name;
     private double height;
-    
+
+
     public Mountain(long id, String name, double height) {
 		super();
 		this.id = id;

@@ -1,18 +1,17 @@
 package be.intecbrussel.restmountain.controllers;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import be.intebrussel.restmountain.model.Mountain;
+import be.intecbrussel.restmountain.model.Mountain;
 import be.intecbrussel.restmountain.repositories.MountainRepo;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 public class MountainController {
@@ -31,14 +30,19 @@ public class MountainController {
 	}*/
 	
 	@RequestMapping(value="/mountains")
-	public Collection<Mountain> mountains() {
-		return repo.initMountainsList();
+	public List<Mountain> mountains() {
+		return repo.mountains;
 	}
 	
-	/*@RequestMapping(value="/mountains/{id}", method = RequestMethod.GET)
-	public Collection<Mountain> displayMountainsById(@PathVariable("id") long id) {
-		return repo.
-	}*/
+	@RequestMapping(value="/mountains/{id}")
+	public Mountain mountain(@PathVariable("id") int id) {
+        for (Mountain m : repo.mountains){
+            if(m.getId()==id){
+                return m;
+            }
+        }
+        return null;
+	}
 	
 	
 }
